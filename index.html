@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Callozzi Football Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--bg:#090909;--surface:#131313;--surface-2:#1b1b1b;--border:rgba(255,255,255,.08);--primary:#d71928;--primary-light:#ff3344;--text:#f5f5f5;--muted:#b7b7b7;--radius:22px;--shadow:0 20px 50px rgba(0,0,0,.45);--transition:.25s ease;--container:1180px;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:radial-gradient(circle at top left,rgba(215,25,40,.22),transparent 25%),linear-gradient(180deg,#070707 0%,#101010 100%);color:var(--text);overflow-x:hidden;}
+    img{max-width:100%;display:block;}
+    a{text-decoration:none;color:inherit;}
+    .container{width:min(calc(100% - 2rem),var(--container));margin:auto;}
+    header{position:sticky;top:0;z-index:999;backdrop-filter:blur(16px);background:rgba(0,0,0,.55);border-bottom:1px solid rgba(255,255,255,.05);}
+    .navbar{display:flex;justify-content:space-between;align-items:center;padding:18px 0;}
+    .brand{display:flex;align-items:center;gap:14px;}
+    .brand img{width:58px;height:58px;border-radius:16px;object-fit:contain;background:white;padding:6px;}
+    .brand h2{font-family:'Oswald',sans-serif;font-size:1.6rem;letter-spacing:.05em;text-transform:uppercase;}
+    .nav-links{display:flex;gap:14px;flex-wrap:wrap;}
+    .nav-links a{padding:12px 18px;border-radius:999px;color:var(--muted);transition:var(--transition);font-size:.95rem;}
+    .nav-links a:hover{background:var(--surface-2);color:white;}
+    .hero{min-height:92vh;display:grid;align-items:center;padding:90px 0;}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+    .eyebrow{display:inline-flex;padding:10px 18px;border-radius:999px;background:rgba(215,25,40,.15);border:1px solid rgba(215,25,40,.35);color:#ffb3bb;font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;}
+    h1{font-family:'Oswald',sans-serif;font-size:clamp(4rem,10vw,7rem);line-height:.9;margin-top:24px;text-transform:uppercase;}
+    .hero p{margin-top:26px;color:var(--muted);font-size:1.1rem;max-width:650px;line-height:1.8;}
+    .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;margin-top:34px;}
+    .btn{padding:16px 24px;border-radius:999px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;transition:var(--transition);display:inline-flex;align-items:center;justify-content:center;}
+    .btn-primary{background:var(--primary);box-shadow:0 12px 30px rgba(215,25,40,.35);}
+    .btn-primary:hover{background:var(--primary-light);transform:translateY(-3px);}
+    .btn-secondary{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);}
+    .btn-secondary:hover{background:rgba(255,255,255,.08);}
+    .hero-card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:32px;padding:28px;box-shadow:var(--shadow);}
+    .hero-card img{width:100%;border-radius:24px;object-fit:contain;background:white;max-height:300px;}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px;}
+    .stat{padding:20px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);text-align:center;}
+    .stat strong{display:block;font-family:'Oswald',sans-serif;font-size:2rem;}
+    .stat span{color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;}
+    section{padding:100px 0;}
+    .section-title{margin-bottom:50px;}
+    .section-title h2{font-family:'Oswald',sans-serif;font-size:clamp(2.4rem,5vw,4rem);text-transform:uppercase;line-height:.95;}
+    .section-title p{margin-top:14px;color:var(--muted);max-width:700px;}
+    .players-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .player-card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:24px;position:relative;overflow:hidden;transition:var(--transition);}
+    .player-card:hover{transform:translateY(-6px);border-color:rgba(215,25,40,.35);box-shadow:0 20px 40px rgba(0,0,0,.4);}
+    .player-card.coach{border-color:rgba(215,25,40,.3);background:linear-gradient(180deg,rgba(215,25,40,.12),rgba(255,255,255,.03));}
+    .player-card.coach:hover{border-color:rgba(215,25,40,.6);}
+    .player-number{font-family:'Oswald',sans-serif;font-size:5rem;line-height:1;opacity:.95;}
+    .player-role{display:inline-flex;margin-top:10px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.05);color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;}
+    .player-role.coach-badge{background:rgba(215,25,40,.2);color:#ffb3bb;border:1px solid rgba(215,25,40,.3);}
+    .player-avatar{width:90px;height:90px;border-radius:24px;background:linear-gradient(180deg,#d71928,#700711);display:grid;place-items:center;font-family:'Oswald',sans-serif;font-size:1.7rem;margin:24px 0;}
+    .player-avatar--photo{background:none;overflow:hidden;padding:0;}
+    .player-avatar--photo img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:24px;}
+    .player-card h3{font-size:1.4rem;}
+    .player-card p{margin-top:10px;color:var(--muted);line-height:1.7;font-size:.96rem;}
+    .coach-section{margin-top:60px;}
+    /* GALLERY FEATURED */
+    .gallery-featured{display:grid;gap:20px;margin-bottom:40px;}
+    .gallery-photo-main{position:relative;border-radius:28px;overflow:hidden;border:2px solid rgba(215,25,40,.4);box-shadow:0 0 60px rgba(215,25,40,.2),var(--shadow);cursor:pointer;}
+    .gallery-photo-main img{width:100%;height:480px;object-fit:cover;object-position:center top;display:block;transition:.4s ease;}
+    .gallery-photo-main:hover img{transform:scale(1.03);}
+    .gallery-photo-main .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%);display:flex;align-items:flex-end;padding:28px;opacity:0;transition:var(--transition);}
+    .gallery-photo-main:hover .gallery-overlay{opacity:1;}
+    .gallery-overlay-text{font-family:'Oswald',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.08em;color:white;}
+    .gallery-overlay-text span{color:var(--primary);}
+    .gallery-duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .gallery-duo .gallery-photo-main img{height:340px;}
+    /* MASONRY */
+    .gallery-grid-title{font-family:'Oswald',sans-serif;font-size:1.6rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:24px;color:var(--muted);display:flex;align-items:center;gap:14px;}
+    .gallery-grid-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08);}
+    .gallery-count{font-size:.9rem;color:rgba(255,255,255,.3);letter-spacing:.05em;}
+    .gallery-grid{columns:3;column-gap:16px;}
+    .gitem{break-inside:avoid;margin-bottom:16px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;border:1px solid rgba(255,255,255,.07);transition:var(--transition);}
+    .gitem:hover{border-color:rgba(215,25,40,.4);box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(-3px);}
+    .gitem img{width:100%;display:block;transition:.4s ease;}
+    .gitem:hover img{transform:scale(1.04);}
+    .gitem-overlay{position:absolute;inset:0;background:rgba(215,25,40,.0);display:grid;place-items:center;transition:var(--transition);color:white;font-size:2rem;opacity:0;}
+    .gitem:hover .gitem-overlay{opacity:1;background:rgba(215,25,40,.25);}
+    /* LIGHTBOX */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:9999;place-items:center;}
+    .lightbox.active{display:grid;}
+    .lightbox img{max-width:92vw;max-height:90vh;object-fit:contain;border-radius:16px;box-shadow:0 0 80px rgba(0,0,0,.8);cursor:default;}
+    .lightbox-close{position:absolute;top:24px;right:32px;font-size:1.4rem;color:white;cursor:pointer;background:rgba(255,255,255,.1);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;transition:var(--transition);border:none;}
+    .lightbox-close:hover{background:var(--primary);}
+    .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border:none;color:white;width:50px;height:50px;border-radius:50%;font-size:1.4rem;cursor:pointer;display:grid;place-items:center;transition:var(--transition);}
+    .lightbox-nav:hover{background:var(--primary);}
+    .lightbox-prev{left:24px;}
+    .lightbox-next{right:24px;}
+    .lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);padding:8px 20px;border-radius:999px;font-size:.85rem;color:var(--muted);white-space:nowrap;}
+    /* SPONSOR */
+    .sponsor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .sponsor-card{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:24px;transition:var(--transition);}
+    .sponsor-card:hover{transform:translateY(-5px);}
+    .sponsor-logo{height:190px;border-radius:20px;background:white;display:grid;place-items:center;padding:20px;overflow:hidden;}
+    .sponsor-logo img{width:100%;height:100%;object-fit:contain;}
+    .sponsor-card h3{margin-top:20px;font-size:1.4rem;}
+    .sponsor-card p{margin-top:10px;color:var(--muted);line-height:1.7;}
+    .sponsor-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
+    .sponsor-actions a{padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:var(--transition);font-size:.85rem;font-weight:700;text-transform:uppercase;}
+    .sponsor-actions a:hover{background:var(--primary);}
+    footer{border-top:1px solid rgba(255,255,255,.05);padding:40px 0;color:var(--muted);}
+    .footer-wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+    @media(max-width:1024px){.hero-grid,.players-grid,.sponsor-grid{grid-template-columns:1fr 1fr;}.gallery-grid{columns:2;}}
+    @media(max-width:768px){.navbar{flex-direction:column;gap:18px;}.hero-grid,.players-grid,.sponsor-grid,.stats,.gallery-duo{grid-template-columns:1fr;}h1{font-size:4rem;}.hero{min-height:auto;}.gallery-photo-main img{height:260px;}.gallery-duo .gallery-photo-main img{height:200px;}.gallery-grid{columns:2;}.lightbox-prev{left:8px;}.lightbox-next{right:8px;}}
+    @media(max-width:480px){.gallery-grid{columns:1;}}
+  </style>
+</head>
+<body>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">&#8592;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">&#8594;</button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<header>
+  <div class="container navbar">
+    <a href="#" class="brand">
+      <img src="./assets/0001.jpg" alt="Logo Callozzi">
+      <div><h2>Callozzi FC</h2></div>
+    </a>
+    <nav class="nav-links">
+      <a href="#squadra">Squadra</a>
+      <a href="#gallery">Foto</a>
+      <a href="#sponsor">Sponsor</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Rosso / Nero / Dominio Totale</div>
+      <h1>Callozzi Football Club</h1>
+      <p>Unione, amicizia e joga bonito: questi sono i valori che rappresentano i Callozzi. Una famiglia che, nel bene e nel male, non smette mai di lottare e continua ad avanzare verso un obiettivo comune con passione, sacrificio e spirito di squadra.</p>
+      <div class="hero-buttons">
+        <a href="#squadra" class="btn btn-primary">Scopri la Rosa</a>
+        <a href="#gallery" class="btn btn-secondary">Guarda le Foto</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="./assets/0075.jpg" alt="Callozzi FC — Squadra">
+      <div class="stats">
+        <div class="stat"><strong>9</strong><span>Giocatori</span></div>
+        <div class="stat"><strong>4</strong><span>Ruoli</span></div>
+        <div class="stat"><strong>1</strong><span>Coach</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="squadra">
+  <div class="container">
+    <div class="section-title"><h2>La Rosa</h2><p>Ogni giocatore ha una card moderna e personalizzata.</p></div>
+    <div class="players-grid">
+      <div class="player-card"><div class="player-number">7</div><div class="player-role">Capitano</div><div class="player-avatar player-avatar--photo"><img src="./assets/0086.jpg" alt="Daniele Di Paola"></div><h3>Daniele Di Paola</h3><p>Leader assoluto della squadra, anima del pressing e simbolo di intensità.</p></div>
+      <div class="player-card"><div class="player-number">3</div><div class="player-role">Difensore</div><div class="player-avatar player-avatar--photo"><img src="./assets/0003.png" alt="Massimo Anello"></div><h3>Massimo Anello</h3><p>Difensore fisico e dominante, pilastro del reparto arretrato.</p></div>
+      <div class="player-card"><div class="player-number">10</div><div class="player-role">Regista</div><div class="player-avatar player-avatar--photo"><img src="./assets/0087.jpg" alt="Luca Monastero"></div><h3>Luca Monastero</h3><p>Visione, qualità e fantasia: il cervello della manovra offensiva.</p></div>
+      <div class="player-card"><div class="player-number">9</div><div class="player-role">Attaccante</div><div class="player-avatar player-avatar--photo"><img src="./assets/0090.jpg" alt="Andrea Cottone"></div><h3>Andrea Cottone</h3><p>Finalizzatore cinico e uomo decisivo nei momenti più importanti.</p></div>
+      <div class="player-card"><div class="player-number">17</div><div class="player-role">Portiere</div><div class="player-avatar player-avatar--photo"><img src="./assets/0085.jpg" alt="Pietro Prestigiacomo"></div><h3>Pietro Prestigiacomo</h3><p>Sicurezza totale tra i pali e presenza costante per la squadra.</p></div>
+      <div class="player-card"><div class="player-number">11</div><div class="player-role">Attaccante</div><div class="player-avatar player-avatar--photo"><img src="./assets/0004.jpg" alt="Samuele Stinco"></div><h3>Samuele Stinco</h3><p>Energia infinita e pressione continua su ogni pallone.</p></div>
+      <div class="player-card"><div class="player-number">21</div><div class="player-role">Laterale</div><div class="player-avatar player-avatar--photo"><img src="./assets/0005.jpg" alt="Dario La Scola"></div><h3>Dario La Scola</h3><p>Jolly difensivo intelligente e versatile, sempre pronto ad adattarsi.</p></div>
+      <div class="player-card"><div class="player-number">33</div><div class="player-role">Laterale</div><div class="player-avatar player-avatar--photo"><img src="./assets/0089.jpg" alt="Edoardo Barreca"></div><h3>Edoardo Barreca</h3><p>Difensore roccioso, preciso nelle chiusure e affidabile nelle letture.</p></div>
+      <div class="player-card"><div class="player-number">5</div><div class="player-role">Regista</div><div class="player-avatar player-avatar--photo"><img src="./assets/0088.jpg" alt="Luca D'Alfonso"></div><h3>Luca D'Alfonso</h3><p>Esperienza, visione e calma: equilibrio fondamentale della squadra.</p></div>
+    </div>
+    <div class="coach-section">
+      <div class="section-title"><h2>Staff Tecnico</h2></div>
+      <div class="players-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="player-card coach">
+          <div class="player-number" style="color:var(--primary);">MR</div>
+          <div class="player-role coach-badge">Allenatore</div>
+          <div class="player-avatar player-avatar--photo"><img src="./assets/0006.jpg" alt="Gabriele Lo Monaco"></div>
+          <h3>Gabriele Lo Monaco</h3>
+          <p>Il mister: tattica, visione e autorità. La mente che guida i Callozzi verso la vittoria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="section-title">
+      <h2>Gallery</h2>
+      <p>I momenti più belli della squadra. Clicca per ingrandire.</p>
+    </div>
+    <div class="gallery-featured">
+      <div class="gallery-photo-main" onclick="openFeatured(0)">
+        <img src="./assets/0007.jpg" alt="Callozzi FC — Foto di squadra">
+        <div class="gallery-overlay"><div class="gallery-overlay-text">Callozzi FC — <span>Campioni</span></div></div>
+      </div>
+      <div class="gallery-duo">
+        <div class="gallery-photo-main" onclick="openFeatured(1)">
+          <img src="./assets/0008.jpg" alt="Callozzi FC — Festeggiamenti">
+          <div class="gallery-overlay"><div class="gallery-overlay-text">Tutta la <span>Famiglia</span></div></div>
+        </div>
+        <div class="gallery-photo-main" onclick="openFeatured(0)">
+          <img src="./assets/0009.jpg" alt="Callozzi FC — Squadra">
+          <div class="gallery-overlay"><div class="gallery-overlay-text">La <span>Rosa</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-grid-title">Momenti di gara <span class="gallery-count">35 foto</span></div>
+    <div class="gallery-grid">
+      <div class="gitem" onclick="openLightbox(0)">
+        <img src="./assets/0010.jpg" alt="Callozzi FC foto 1" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(1)">
+        <img src="./assets/0011.jpg" alt="Callozzi FC foto 2" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(2)">
+        <img src="./assets/0012.jpg" alt="Callozzi FC foto 3" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(3)">
+        <img src="./assets/0013.jpg" alt="Callozzi FC foto 4" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(4)">
+        <img src="./assets/0014.jpg" alt="Callozzi FC foto 5" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(5)">
+        <img src="./assets/0015.jpg" alt="Callozzi FC foto 6" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(6)">
+        <img src="./assets/0016.jpg" alt="Callozzi FC foto 7" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(7)">
+        <img src="./assets/0017.jpg" alt="Callozzi FC foto 8" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(8)">
+        <img src="./assets/0018.jpg" alt="Callozzi FC foto 9" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(9)">
+        <img src="./assets/0019.jpg" alt="Callozzi FC foto 10" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(10)">
+        <img src="./assets/0020.jpg" alt="Callozzi FC foto 11" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(11)">
+        <img src="./assets/0021.jpg" alt="Callozzi FC foto 12" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(12)">
+        <img src="./assets/0022.jpg" alt="Callozzi FC foto 13" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(13)">
+        <img src="./assets/0023.jpg" alt="Callozzi FC foto 14" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(14)">
+        <img src="./assets/0024.jpg" alt="Callozzi FC foto 15" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(15)">
+        <img src="./assets/0025.jpg" alt="Callozzi FC foto 16" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(16)">
+        <img src="./assets/0026.jpg" alt="Callozzi FC foto 17" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(17)">
+        <img src="./assets/0027.jpg" alt="Callozzi FC foto 18" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(18)">
+        <img src="./assets/0028.jpg" alt="Callozzi FC foto 19" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(19)">
+        <img src="./assets/0029.jpg" alt="Callozzi FC foto 20" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(20)">
+        <img src="./assets/0030.jpg" alt="Callozzi FC foto 21" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(21)">
+        <img src="./assets/0031.jpg" alt="Callozzi FC foto 22" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(22)">
+        <img src="./assets/0032.jpg" alt="Callozzi FC foto 23" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(23)">
+        <img src="./assets/0033.jpg" alt="Callozzi FC foto 24" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(24)">
+        <img src="./assets/0034.jpg" alt="Callozzi FC foto 25" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(25)">
+        <img src="./assets/0035.jpg" alt="Callozzi FC foto 26" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(26)">
+        <img src="./assets/0036.jpg" alt="Callozzi FC foto 27" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(27)">
+        <img src="./assets/0037.jpg" alt="Callozzi FC foto 28" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(28)">
+        <img src="./assets/0038.jpg" alt="Callozzi FC foto 29" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(29)">
+        <img src="./assets/0039.jpg" alt="Callozzi FC foto 30" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(30)">
+        <img src="./assets/0040.jpg" alt="Callozzi FC foto 31" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(31)">
+        <img src="./assets/0041.jpg" alt="Callozzi FC foto 32" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(32)">
+        <img src="./assets/0042.jpg" alt="Callozzi FC foto 33" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(33)">
+        <img src="./assets/0043.jpg" alt="Callozzi FC foto 34" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+      <div class="gitem" onclick="openLightbox(34)">
+        <img src="./assets/0044.jpg" alt="Callozzi FC foto 35" loading="lazy">
+        <div class="gitem-overlay"><span>&#9654;</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="sponsor">
+  <div class="container">
+    <div class="section-title"><h2>Sponsor</h2><p>I partner ufficiali del team.</p></div>
+    <div class="sponsor-grid">
+      <div class="sponsor-card"><div class="sponsor-logo"><img src="./assets/0045.jpg" alt="La Pecora Nera"></div><h3>La Pecora Nera</h3><p>Veniteci a trovare da: La Pecora Nera</p><div class="sponsor-actions"><a href="#">Instagram</a><a href="#">Maps</a></div></div>
+      <div class="sponsor-card"><div class="sponsor-logo"><img src="./assets/0046.jpg" alt="Riparo Shop"></div><h3>Riparo Shop</h3><p>Veniteci a trovare da: Riparo Shop</p><div class="sponsor-actions"><a href="#">Instagram</a><a href="#">Maps</a></div></div>
+      <div class="sponsor-card"><div class="sponsor-logo" style="background:#000;"><img src="./assets/0047.jpg" alt="Lo Piccolo Ceramiche"></div><h3>Lo Piccolo Ceramiche</h3><p>Veniteci a trovare da: Lo Piccolo Ceramiche</p><div class="sponsor-actions"><a href="#">Instagram</a><a href="#">Maps</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-wrap">
+    <p>© Callozzi Football Club</p>
+    <p>Rosso • Nero • Dominio totale</p>
+    <p>Realizzato da Massimo Anello</p>
+  </div>
+</footer>
+
+<script>
+  const galleryImgs = ["./assets/0048.jpg","./assets/0049.jpg","./assets/0050.jpg","./assets/0051.jpg","./assets/0052.jpg","./assets/0053.jpg","./assets/0054.jpg","./assets/0055.jpg","./assets/0056.jpg","./assets/0057.jpg","./assets/0058.jpg","./assets/0059.jpg","./assets/0060.jpg","./assets/0061.jpg","./assets/0062.jpg","./assets/0063.jpg","./assets/0064.jpg","./assets/0065.jpg","./assets/0066.jpg","./assets/0067.jpg","./assets/0068.jpg","./assets/0069.jpg","./assets/0070.jpg","./assets/0071.jpg","./assets/0072.jpg","./assets/0073.jpg","./assets/0074.jpg","./assets/0075.jpg","./assets/0076.jpg","./assets/0077.jpg","./assets/0078.jpg","./assets/0079.jpg","./assets/0080.jpg","./assets/0081.jpg","./assets/0082.jpg"];
+  const featuredImgs = ["./assets/0083.jpg", "./assets/0084.jpg"];
+  let allImgs = [];
+  let currentIdx = 0;
+
+  function openFeatured(i) { allImgs = featuredImgs; currentIdx = i; showLightbox(); }
+  function openLightbox(i) { allImgs = galleryImgs; currentIdx = i; showLightbox(); }
+
+  function showLightbox() {
+    document.getElementById('lightbox-img').src = allImgs[currentIdx];
+    document.getElementById('lightbox-counter').textContent = (currentIdx+1) + ' / ' + allImgs.length;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function navLightbox(dir) {
+    currentIdx = (currentIdx + dir + allImgs.length) % allImgs.length;
+    document.getElementById('lightbox-img').src = allImgs[currentIdx];
+    document.getElementById('lightbox-counter').textContent = (currentIdx+1) + ' / ' + allImgs.length;
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if(e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if(!document.getElementById('lightbox').classList.contains('active')) return;
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowRight') navLightbox(1);
+    if(e.key==='ArrowLeft') navLightbox(-1);
+  });
+</script>
+</body>
+</html>
